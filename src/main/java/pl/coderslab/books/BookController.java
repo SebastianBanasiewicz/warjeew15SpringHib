@@ -3,6 +3,7 @@ package pl.coderslab.books;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.repository.BookRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,12 +15,14 @@ public class BookController {
     private final BookDao bookDao;
     private final PublisherDao publisherDao;
     private final AuthorDao authorDao;
+    private final BookRepository bookRepository;
 
 
-    public BookController(BookDao bookDao, PublisherDao publisherDao, AuthorDao authorDao) {
+    public BookController(BookDao bookDao, PublisherDao publisherDao, AuthorDao authorDao, BookRepository bookRepository) {
         this.bookDao = bookDao;
         this.publisherDao = publisherDao;
         this.authorDao = authorDao;
+        this.bookRepository = bookRepository;
     }
 
     @GetMapping("/create")
@@ -124,4 +127,5 @@ public class BookController {
                 .forEach(b -> System.out.println(b.getTitle()));
         return "test-authors";
     }
+
 }
